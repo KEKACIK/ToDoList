@@ -1,0 +1,10 @@
+aiogram==3.0.0b7
+redis
+environs
+pydantic
+pyyaml
+loguru
+openpyxl
+django
+environs
+loguru

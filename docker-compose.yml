@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  bot:
+    build:
+      context: ./src/bot
+      dockerfile: bot.dockerfile
+    restart: on-failure
+    environment:
+      REDIS_HOST: redis
+      POSTGRES_SERVER: db
+    volumes:
+      - ./logs:/bot/logs
+      - ./data/files:/bot/files
+    env_file:
+      - .env
+  web:
+    build:
+      context: ./src/web
+      dockerfile: web.dockerfile
+    ports:
+      - "127.0.0.2:7777:8000"
+    restart: on-failure
+    volumes:
+      - ./src/web:/web
+      - ./data:/src/web/db.sqlite3
+    env_file:
+      - .env
+    command: >
+      sh -c "sleep 10 &&
+             python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+  redis:
+    image: redis
+    restart: on-failure
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data/redis:/data
