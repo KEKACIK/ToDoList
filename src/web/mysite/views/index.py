@@ -11,4 +11,4 @@ def indexView(request):
     context = {
         "tasks": tasks
     }
-    return render(request, 'mysite/index.html', context)
+    return render(request, 'mysite/../../templates/mysite/index.html', context)

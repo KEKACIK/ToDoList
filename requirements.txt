@@ -5,6 +5,7 @@ pydantic
 pyyaml
 loguru
 openpyxl
+requests
 django
 environs
 loguru

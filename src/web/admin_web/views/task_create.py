@@ -4,7 +4,7 @@ from django.views import View
 from admin_web.models import Telegram, Task
 
 
-class ApiCreateView(View):
+class ApiTaskCreateView(View):
     def get(self, request, telegram_id):
         telegram = Telegram.objects.get(telegram_id=int(telegram_id))
         if not telegram or not telegram.user:
